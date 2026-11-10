@@ -65,10 +65,10 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .logo{font-family:var(--display);font-weight:800;font-size:22px;text-decoration:none;display:flex;align-items:center;gap:10px}
 .logo-mark{width:30px;height:30px;border-radius:8px;background:var(--pine);display:grid;place-items:center}
 .logo-mark span{display:block;width:16px;height:3px;background:var(--sun);box-shadow:0 -6px 0 var(--sun),0 6px 0 var(--sun)}
-.nav-links{display:flex;gap:22px;font-size:15px;font-weight:600}
+.nav-links{display:flex;gap:22px;font-size:15px;font-weight:600;white-space:nowrap}
 .nav-links a{text-decoration:none;color:var(--muted);transition:color .2s}
 .nav-links a:hover{color:var(--ink)}
-@media (max-width:760px){.nav-links{display:none}}
+@media (max-width:1080px){.nav-links{display:none}}
 
 .btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:16px;text-decoration:none;padding:13px 22px;border-radius:999px;border:2px solid var(--line);transition:transform .2s ease, box-shadow .2s ease;cursor:pointer;font-family:var(--body)}
 .btn:hover{transform:translateY(-2px);box-shadow:0 6px 0 color-mix(in srgb, var(--line) 25%, transparent)}
