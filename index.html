@@ -217,6 +217,45 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 .lang-switch button[aria-pressed="true"]{background:var(--pine);color:var(--on-pine)}
 .lang-switch button:focus-visible{outline:3px solid var(--sun);outline-offset:-3px}
 main,footer{transition:opacity .22s ease}
+/* waitlist */
+.waitlist{background:var(--sun);color:#0F241D;border-block:2px solid #0F241D}
+.waitlist .eyebrow{color:#0F241D}
+.waitlist .section-head p{color:#24392F}
+.perks{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.perk{background:#FFFDF4;border:2px solid #0F241D;border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.perk p{color:#24392F;font-size:16px}
+.perk-icon{width:44px;height:44px;border-radius:12px;background:#0F241D;color:#FFC83D;display:grid;place-items:center}
+.perk-icon svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.wl-cta{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:28px}
+.wl-cta .btn-dark{background:#0F241D;color:#FFC83D;border-color:#0F241D}
+.wl-note{font-size:14px;color:#24392F;max-width:520px}
+.wl-note a{color:#0F241D;font-weight:700}
+@media (max-width:860px){.perks{grid-template-columns:1fr}}
+/* partners */
+.partner-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.partner{background:var(--surface);border:2px solid var(--line);border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.partner .tag{align-self:flex-start;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:var(--pine-soft);color:var(--ink)}
+.partner dl{margin:0;display:flex;flex-direction:column;gap:10px}
+.partner dt{font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--pine)}
+.partner dd{margin:0;color:var(--muted);font-size:16px}
+.partner-cta{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:24px}
+.partner-cta p{color:var(--muted);font-size:15px;max-width:560px}
+@media (max-width:960px){.partner-grid{grid-template-columns:1fr}}
+/* faq */
+.faq{background:var(--band);border-block:2px solid var(--line)}
+.faq-list{display:flex;flex-direction:column;gap:12px;max-width:820px}
+.faq-list details{background:var(--surface);border:2px solid var(--line);border-radius:16px;overflow:hidden}
+.faq-list summary{cursor:pointer;list-style:none;padding:18px 22px;font-family:var(--display);font-weight:700;font-size:19px;display:flex;justify-content:space-between;gap:16px;align-items:center}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary::after{content:"+";font-size:26px;line-height:1;color:var(--pine);transition:transform .3s ease}
+.faq-list details[open] summary::after{transform:rotate(45deg)}
+.faq-list summary:focus-visible{outline:3px solid var(--sun);outline-offset:-3px}
+.faq-list .ans{padding:0 22px 20px;color:var(--muted)}
+.faq-list details[open] .ans{animation:faqIn .35s ease}
+@keyframes faqIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.faq-list details[open] .ans{animation:none}.faq-list summary::after{transition:none}}
+.footer-links{display:flex;gap:18px}
+.footer-links a{color:var(--muted)}
 .switching main,.switching footer{opacity:0}
 @media (max-width:560px){.nav-right .btn{display:none}}
 @media (prefers-reduced-motion:reduce){main,footer,.lang-switch button{transition:none}.switching main,.switching footer{opacity:1}}
@@ -229,8 +268,9 @@ main,footer{transition:opacity .22s ease}
       <a href="#how" data-i18n="nav.how">How it works</a>
       <a href="#prototype" data-i18n="nav.proto">Prototype</a>
       <a href="#trust" data-i18n="nav.trust">Trust</a>
+      <a href="#partners" data-i18n="nav.partners">Partners</a>
       <a href="#team" data-i18n="nav.team">Team</a>
-      <a href="#contact" data-i18n="nav.contact">Contact</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
     </nav>
     <div class="nav-right">
       <div class="lang-switch" role="group" aria-label="Language">
@@ -243,7 +283,7 @@ main,footer{transition:opacity .22s ease}
         <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
         <span class="label" data-i18n="nav.theme">Theme</span>
       </button>
-      <a class="btn btn-primary" href="#contact" data-i18n="nav.cta">Get involved</a>
+      <a class="btn btn-primary" href="#waitlist" data-i18n="nav.cta">Join waitlist</a>
     </div>
   </div>
 </header>
@@ -256,7 +296,7 @@ main,footer{transition:opacity .22s ease}
         <h1 style="margin-top:14px" data-i18n="hero.h1">Trust your neighbour, <em>skip the store.</em></h1>
         <p class="lead" data-i18n="hero.lead">ShareShelf lets you rent everyday things from people nearby: a drill for one evening, a tent for a weekend, a camera for a project. Owners earn from gear that sits idle.</p>
         <div class="ctas">
-          <a class="btn btn-sun" data-form href="https://forms.gle/hRL43Rk2SbrB9vVY9" target="_blank" rel="noopener" data-i18n="hero.survey">Take our 3-minute survey</a>
+          <a class="btn btn-sun" href="#waitlist" data-i18n="hero.wait">Join the waitlist</a>
           <a class="btn btn-ghost" href="#prototype" data-i18n="hero.proto">See the prototype</a>
         </div>
         <p class="tagline" data-i18n="tagline">Rent it. Use it. Return it.</p>
@@ -370,6 +410,65 @@ main,footer{transition:opacity .22s ease}
     </div>
   </section>
 
+  <section class="waitlist" id="waitlist">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow" data-i18n="wl.eyebrow">Early access</p>
+        <h2 data-i18n="wl.h2">Join the waitlist</h2>
+        <p data-i18n="wl.p">ShareShelf launches soon in Tallinn. Leave your email and be among the first to rent and lend.</p>
+      </div>
+      <div class="perks reveal">
+        <div class="perk"><span class="perk-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><h3 data-i18n="wl.h_1">First access in your area</h3><p data-i18n="wl.p_1">We open district by district. People on the waitlist get invited first.</p></div>
+        <div class="perk"><span class="perk-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8"/></svg></span><h3 data-i18n="wl.h_2">Founding member badge</h3><p data-i18n="wl.p_2">A badge on your profile that shows you were with us from the start.</p></div>
+        <div class="perk"><span class="perk-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg></span><h3 data-i18n="wl.h_3">Launch updates</h3><p data-i18n="wl.p_3">Short news about the pilot, new categories and the launch date. No spam.</p></div>
+      </div>
+      <div class="wl-cta reveal">
+        <a class="btn btn-dark" data-wait href="https://forms.gle/hRL43Rk2SbrB9vVY9" target="_blank" rel="noopener" data-i18n="wl.btn">Join the waitlist</a>
+        <p class="wl-note" data-i18n="wl.note">About 3 minutes: a short survey with your email at the end. We use your email only to invite you. Read our <a href="privacy.html">privacy notice</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="partners">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow" data-i18n="pt.eyebrow">Partners</p>
+        <h2 data-i18n="pt.h2">Become a partner</h2>
+        <p data-i18n="pt.p">We are looking for partners in Tallinn for our pilot. Here is what we can do together.</p>
+      </div>
+      <div class="partner-grid reveal">
+        <div class="partner">
+          <span class="tag" data-i18n="pt.t1">Education</span>
+          <h3 data-i18n="pt.h_1">Universities and dorms</h3>
+          <dl>
+            <dt data-i18n="pt.together">Together</dt><dd data-i18n="pt.w_1">A shared campus shelf where students rent what they need for a day.</dd>
+            <dt data-i18n="pt.get">You get</dt><dd data-i18n="pt.g_1">Students save money, and less stuff piles up in dorm rooms.</dd>
+          </dl>
+        </div>
+        <div class="partner">
+          <span class="tag" data-i18n="pt.t2">Business</span>
+          <h3 data-i18n="pt.h_2">Rental shops and repair workshops</h3>
+          <dl>
+            <dt data-i18n="pt.together">Together</dt><dd data-i18n="pt.w_2">Item checks, repairs after damage, and gear that is not on ShareShelf yet.</dd>
+            <dt data-i18n="pt.get">You get</dt><dd data-i18n="pt.g_2">New customers from our users and paid repair jobs.</dd>
+          </dl>
+        </div>
+        <div class="partner">
+          <span class="tag" data-i18n="pt.t3">Community</span>
+          <h3 data-i18n="pt.h_3">Clubs and communities</h3>
+          <dl>
+            <dt data-i18n="pt.together">Together</dt><dd data-i18n="pt.w_3">Sports, hiking and photo clubs share gear between members through ShareShelf.</dd>
+            <dt data-i18n="pt.get">You get</dt><dd data-i18n="pt.g_3">A simple way to lend club gear with a deposit and clear rules.</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="partner-cta reveal">
+        <a class="btn btn-primary" data-form href="https://forms.gle/hRL43Rk2SbrB9vVY9" target="_blank" rel="noopener" data-i18n="pt.btn">Become a partner</a>
+        <p data-i18n="pt.note">For now, leave your email at the end of our short form and mention your organisation. We will contact you.</p>
+      </div>
+    </div>
+  </section>
+
   <section id="team">
     <div class="wrap">
       <div class="section-head reveal">
@@ -386,13 +485,32 @@ main,footer{transition:opacity .22s ease}
     </div>
   </section>
 
-  <section id="contact" style="padding-top:0">
+  <section class="faq" id="faq">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow" data-i18n="faq.eyebrow">FAQ</p>
+        <h2 data-i18n="faq.h2">Questions and answers</h2>
+      </div>
+      <div class="faq-list reveal">
+        <details><summary data-i18n="faq.q1">How much does it cost?</summary><p class="ans" data-i18n="faq.a1">The owner sets the daily price. ShareShelf adds a small service fee to each rental. Joining and listing items is free.</p></details>
+        <details><summary data-i18n="faq.q2">What if the item gets damaged?</summary><p class="ans" data-i18n="faq.a2">Both sides check the item at handover and return. Small damage is covered by the deposit. In bigger cases, our team helps both sides agree on a fair solution.</p></details>
+        <details><summary data-i18n="faq.q3">How does the deposit work?</summary><p class="ans" data-i18n="faq.a3">The deposit is held when you book and released after the owner confirms that the item came back in good condition.</p></details>
+        <details><summary data-i18n="faq.q4">Who can rent and lend?</summary><p class="ans" data-i18n="faq.a4">Anyone aged 18 or over who confirms their identity. Verified users and two-way ratings keep the community safe.</p></details>
+        <details><summary data-i18n="faq.q5">What can I list?</summary><p class="ans" data-i18n="faq.a5">Everyday items worth up to €500: tools, camping and sports gear, cameras, party equipment and more. Unsafe or illegal items are not allowed.</p></details>
+        <details><summary data-i18n="faq.q6">How do pickup and return work?</summary><p class="ans" data-i18n="faq.a6">You agree on a time and place in the chat, meet the owner and check the item together. At return, the owner taps “Accepted” to close the rental.</p></details>
+        <details><summary data-i18n="faq.q7">When and where does ShareShelf launch?</summary><p class="ans" data-i18n="faq.a7">We start with a pilot in Tallinn. Join the waitlist to get an invite as soon as your area opens.</p></details>
+        <details><summary data-i18n="faq.q8">Is there an app?</summary><p class="ans" data-i18n="faq.a8">Not yet. You can try our clickable prototype today. It runs in the browser on your phone, so there is nothing to install.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
     <div class="wrap">
       <div class="section-head reveal">
         <p class="eyebrow" data-i18n="contact.eyebrow">Get involved</p>
         <h2 data-i18n="contact.h2">Help us shape ShareShelf</h2>
       </div>
-      <div class="contact-grid reveal">
+      <div class="contact-grid reveal" style="grid-template-columns:1fr;max-width:760px">
         <div class="contact-card">
           <h3 data-i18n="contact.sh">Take the survey</h3>
           <p data-i18n="contact.sp">Three minutes, anonymous unless you choose to leave your email. Tell us what you would rent, lend and pay.</p>
@@ -402,17 +520,6 @@ main,footer{transition:opacity .22s ease}
             <a class="btn btn-ghost" href="https://forms.gle/CAFb5LYJdrUB7gSm6" target="_blank" rel="noopener" lang="ru">На русском</a>
           </div>
         </div>
-        <div class="contact-card partner">
-          <h3 data-i18n="contact.ph">Partner with us</h3>
-          <p data-i18n="contact.pp">We are looking for partners for the pilot:</p>
-          <ul>
-            <li data-i18n="contact.p1">Universities, dorms and student councils (a shared campus shelf)</li>
-            <li data-i18n="contact.p2">Rental shops and repair workshops (item checks and repairs)</li>
-            <li data-i18n="contact.p3">Lenders with camping, sports or photo gear</li>
-          </ul>
-          <p data-i18n="contact.pf">Fill in the short survey and leave your email at the end. We will get back to you about working together.</p>
-          <div class="lang-row"><a class="btn btn-ghost" style="border-color:#0F241D;color:#0F241D" data-form href="https://forms.gle/hRL43Rk2SbrB9vVY9" target="_blank" rel="noopener" data-i18n="contact.btn">Contact us via the form</a></div>
-        </div>
       </div>
     </div>
   </section>
@@ -421,6 +528,7 @@ main,footer{transition:opacity .22s ease}
 <footer>
   <div class="wrap">
     <span>ShareShelf · <span data-i18n="tagline">Rent it. Use it. Return it.</span></span>
+    <nav class="footer-links" aria-label="Footer"><a href="#faq" data-i18n="nav.faq">FAQ</a><a href="privacy.html" data-i18n="foot.privacy">Privacy notice</a></nav>
     <span data-i18n="footer">Tallinn, Estonia · Launching soon</span>
   </div>
 </footer>
@@ -437,13 +545,19 @@ main,footer{transition:opacity .22s ease}
     et: 'https://forms.gle/LuRUwG1xkrgMJ6Dw5',
     ru: 'https://forms.gle/CAFb5LYJdrUB7gSm6'
   };
+  /* waitlist: replace with a dedicated waitlist form when it exists */
+  var WAITLIST = {
+    en: 'https://forms.gle/hRL43Rk2SbrB9vVY9',
+    et: 'https://forms.gle/LuRUwG1xkrgMJ6Dw5',
+    ru: 'https://forms.gle/CAFb5LYJdrUB7gSm6'
+  };
   var T = {
     et: {
-      'nav.how':'Kuidas see töötab','nav.proto':'Prototüüp','nav.trust':'Usaldus','nav.team':'Meeskond','nav.contact':'Kontakt','nav.theme':'Teema','nav.cta':'Löö kaasa',
+      'nav.how':'Kuidas see töötab','nav.proto':'Prototüüp','nav.trust':'Usaldus','nav.team':'Meeskond','nav.theme':'Teema',
       'hero.eyebrow':'Rent inimeselt inimesele · Tallinn',
       'hero.h1':'Usalda naabrit, <em>jäta pood vahele.</em>',
       'hero.lead':'ShareShelf aitab rentida igapäevaseid asju inimestelt sinu lähedal: trelli üheks õhtuks, telki nädalavahetuseks, kaamerat projektiks. Omanikud teenivad asjadega, mis muidu seisavad kasutult.',
-      'hero.survey':'Vasta 3-minutilisele küsitlusele','hero.proto':'Vaata prototüüpi',
+      'hero.proto':'Vaata prototüüpi',
       'tagline':'Rendi. Kasuta. Tagasta.',
       'tag.cat':'Tööriistad','tag.verified':'Kinnitatud omanik','tag.title':'Akutrell koos otsikutega',
       'tag.price':'Hind','tag.priceV':'4 € / päev','tag.deposit':'Tagatisraha','tag.depositV':'40 €, tagastatakse pärast kontrolli',
@@ -485,11 +599,11 @@ main,footer{transition:opacity .22s ease}
       'footer':'Tallinn, Eesti · Varsti tulekul'
     },
     ru: {
-      'nav.how':'Как это работает','nav.proto':'Прототип','nav.trust':'Доверие','nav.team':'Команда','nav.contact':'Контакты','nav.theme':'Тема','nav.cta':'Участвовать',
+      'nav.how':'Как это работает','nav.proto':'Прототип','nav.trust':'Доверие','nav.team':'Команда','nav.theme':'Тема',
       'hero.eyebrow':'Аренда между людьми · Таллинн',
       'hero.h1':'Доверься соседу, <em>забудь про магазин.</em>',
       'hero.lead':'ShareShelf помогает брать в аренду повседневные вещи у людей рядом: дрель на вечер, палатку на выходные, камеру для проекта. Владельцы зарабатывают на вещах, которые обычно просто лежат.',
-      'hero.survey':'Пройти опрос за 3 минуты','hero.proto':'Посмотреть прототип',
+      'hero.proto':'Посмотреть прототип',
       'tagline':'Арендуй. Пользуйся. Верни.',
       'tag.cat':'Инструменты','tag.verified':'Проверенный владелец','tag.title':'Аккумуляторная дрель с насадками',
       'tag.price':'Цена','tag.priceV':'4 € / день','tag.deposit':'Залог','tag.depositV':'40 €, вернётся после проверки',
@@ -531,6 +645,57 @@ main,footer{transition:opacity .22s ease}
       'footer':'Таллинн, Эстония · Скоро запуск'
     }
   };
+
+  Object.assign(T.et, {
+    'nav.partners':'Partnerid','nav.faq':'KKK','nav.cta':'Liitu','hero.wait':'Liitu ootenimekirjaga','foot.privacy':'Privaatsusteade',
+    'wl.eyebrow':'Varajane ligipääs','wl.h2':'Liitu ootenimekirjaga',
+    'wl.p':'ShareShelf käivitub varsti Tallinnas. Jäta oma e-post ja ole esimeste seas, kes saavad rentida ja välja laenata.',
+    'wl.h_1':'Esimene ligipääs sinu piirkonnas','wl.p_1':'Avame linnaosa kaupa. Ootenimekirjas olijad saavad kutse esimesena.',
+    'wl.h_2':'Asutajaliikme märk','wl.p_2':'Märk sinu profiilil, mis näitab, et olid meiega algusest peale.',
+    'wl.h_3':'Uudised käivitamisest','wl.p_3':'Lühikesed uudised piloodist, uutest kategooriatest ja käivitamise kuupäevast. Ilma rämpspostita.',
+    'wl.btn':'Liitu ootenimekirjaga',
+    'wl.note':'Umbes 3 minutit: lühike küsitlus, mille lõpus jätad oma e-posti. Kasutame seda ainult kutse saatmiseks. Loe meie <a href="privacy.html">privaatsusteadet</a>.',
+    'pt.eyebrow':'Partnerid','pt.h2':'Saa meie partneriks','pt.p':'Otsime pilootprojektile partnereid Tallinnas. Vaata, mida saame koos teha.',
+    'pt.together':'Koos','pt.get':'Sina saad',
+    'pt.t1':'Haridus','pt.h_1':'Ülikoolid ja ühiselamud','pt.w_1':'Ühine riiul ülikoolilinnakus, kust tudengid saavad vajaliku päevaks rentida.','pt.g_1':'Tudengid säästavad raha ja ühiselamutubadesse koguneb vähem asju.',
+    'pt.t2':'Äri','pt.h_2':'Rendipoed ja remonditöökojad','pt.w_2':'Asjade kontroll, parandus pärast kahjustusi ja varustus, mida ShareShelfis veel pole.','pt.g_2':'Uued kliendid meie kasutajate seast ja tasulised remonditööd.',
+    'pt.t3':'Kogukond','pt.h_3':'Klubid ja kogukonnad','pt.w_3':'Spordi-, matka- ja fotoklubid jagavad liikmete vahel varustust ShareShelfi kaudu.','pt.g_3':'Lihtne viis klubi varustust tagatisraha ja selgete reeglitega välja laenata.',
+    'pt.btn':'Saa partneriks','pt.note':'Seni jäta palun oma e-post meie lühikese vormi lõppu ja nimeta oma organisatsioon. Võtame sinuga ühendust.',
+    'faq.eyebrow':'KKK','faq.h2':'Küsimused ja vastused',
+    'faq.q1':'Kui palju see maksab?','faq.a1':'Päevahinna määrab omanik. ShareShelf lisab igale rendile väikese teenustasu. Liitumine ja asjade lisamine on tasuta.',
+    'faq.q2':'Mis saab, kui asi saab kahjustada?','faq.a2':'Mõlemad pooled kontrollivad asja üleandmisel ja tagastamisel. Väiksemad kahjud kaetakse tagatisrahast. Suuremate juhtumite korral aitab meie meeskond pooltel õiglases lahenduses kokku leppida.',
+    'faq.q3':'Kuidas tagatisraha toimib?','faq.a3':'Tagatisraha hoitakse broneerimisel kinni ja vabastatakse, kui omanik on kinnitanud, et asi tuli tagasi heas korras.',
+    'faq.q4':'Kes saab rentida ja välja laenata?','faq.a4':'Iga vähemalt 18-aastane, kes kinnitab oma isiku. Kinnitatud kasutajad ja vastastikused hinnangud hoiavad kogukonna turvalisena.',
+    'faq.q5':'Mida saan välja panna?','faq.a5':'Igapäevased asjad väärtusega kuni 500 €: tööriistad, matka- ja spordivarustus, kaamerad, peotehnika ja muu. Ohtlikud või ebaseaduslikud asjad ei ole lubatud.',
+    'faq.q6':'Kuidas toimub üleandmine ja tagastamine?','faq.a6':'Lepite vestluses kokku aja ja koha, kohtute omanikuga ja kontrollite asja koos. Tagastamisel vajutab omanik „Vastu võetud“ ja rent lõpeb.',
+    'faq.q7':'Millal ja kus ShareShelf käivitub?','faq.a7':'Alustame piloodiga Tallinnas. Liitu ootenimekirjaga, et saada kutse kohe, kui sinu piirkond avatakse.',
+    'faq.q8':'Kas rakendus on olemas?','faq.a8':'Veel mitte. Meie klikitavat prototüüpi saad proovida juba täna. See töötab telefoni brauseris, nii et midagi pole vaja installida.'
+  });
+  Object.assign(T.ru, {
+    'nav.partners':'Партнёрам','nav.faq':'Вопросы','nav.cta':'Записаться','hero.wait':'Записаться в лист ожидания','foot.privacy':'Конфиденциальность',
+    'wl.eyebrow':'Ранний доступ','wl.h2':'Запишись в лист ожидания',
+    'wl.p':'ShareShelf скоро запустится в Таллинне. Оставь почту и будь среди первых, кто сможет арендовать и сдавать вещи.',
+    'wl.h_1':'Первый доступ в твоём районе','wl.p_1':'Мы открываемся по районам. Участники листа ожидания получат приглашение первыми.',
+    'wl.h_2':'Значок основателя','wl.p_2':'Значок в профиле, который показывает, что ты с нами с самого начала.',
+    'wl.h_3':'Новости запуска','wl.p_3':'Короткие новости о пилоте, новых категориях и дате запуска. Без спама.',
+    'wl.btn':'Записаться',
+    'wl.note':'Около 3 минут: короткий опрос, в конце которого ты оставляешь почту. Мы используем её только для приглашения. Подробнее — в <a href="privacy.html">политике конфиденциальности</a>.',
+    'pt.eyebrow':'Партнёрам','pt.h2':'Стань партнёром','pt.p':'Мы ищем партнёров в Таллинне для пилота. Вот что мы можем сделать вместе.',
+    'pt.together':'Вместе','pt.get':'Вы получаете',
+    'pt.t1':'Образование','pt.h_1':'Университеты и общежития','pt.w_1':'Общая полка в кампусе, где студенты берут нужные вещи на день.','pt.g_1':'Студенты экономят, а в комнатах общежития становится меньше лишних вещей.',
+    'pt.t2':'Бизнес','pt.h_2':'Пункты проката и мастерские','pt.w_2':'Проверка вещей, ремонт после повреждений и снаряжение, которого ещё нет на ShareShelf.','pt.g_2':'Новые клиенты из наших пользователей и платные заказы на ремонт.',
+    'pt.t3':'Сообщества','pt.h_3':'Клубы и сообщества','pt.w_3':'Спортивные, туристические и фотоклубы делятся снаряжением между участниками через ShareShelf.','pt.g_3':'Простой способ давать снаряжение клуба с залогом и понятными правилами.',
+    'pt.btn':'Стать партнёром','pt.note':'Пока что оставьте почту в конце нашей короткой формы и укажите вашу организацию. Мы свяжемся с вами.',
+    'faq.eyebrow':'Вопросы','faq.h2':'Вопросы и ответы',
+    'faq.q1':'Сколько это стоит?','faq.a1':'Цену за день устанавливает владелец. ShareShelf добавляет к каждой аренде небольшую комиссию. Регистрация и размещение вещей бесплатны.',
+    'faq.q2':'Что если вещь повредят?','faq.a2':'Обе стороны проверяют вещь при передаче и возврате. Мелкие повреждения покрываются залогом. В более серьёзных случаях наша команда помогает сторонам договориться о честном решении.',
+    'faq.q3':'Как работает залог?','faq.a3':'Залог удерживается при бронировании и возвращается, когда владелец подтвердит, что вещь вернулась в порядке.',
+    'faq.q4':'Кто может арендовать и сдавать?','faq.a4':'Любой человек от 18 лет, подтвердивший личность. Проверенные пользователи и взаимные оценки делают сообщество безопасным.',
+    'faq.q5':'Что можно сдавать?','faq.a5':'Повседневные вещи стоимостью до 500 €: инструменты, туристическое и спортивное снаряжение, камеры, техника для вечеринок и другое. Опасные и запрещённые вещи сдавать нельзя.',
+    'faq.q6':'Как проходит передача и возврат?','faq.a6':'Вы договариваетесь о времени и месте в чате, встречаетесь с владельцем и вместе проверяете вещь. При возврате владелец нажимает «Принято», и аренда закрывается.',
+    'faq.q7':'Когда и где запускается ShareShelf?','faq.a7':'Мы начинаем с пилота в Таллинне. Запишись в лист ожидания, чтобы получить приглашение, как только откроется твой район.',
+    'faq.q8':'Есть ли приложение?','faq.a8':'Пока нет. Кликабельный прототип можно попробовать уже сейчас. Он работает в браузере телефона, ничего устанавливать не нужно.'
+  });
   var nodes = document.querySelectorAll('[data-i18n]');
   var EN = {};
   nodes.forEach(function(n){ var k = n.getAttribute('data-i18n'); if (!(k in EN)) EN[k] = n.innerHTML; });
@@ -540,7 +705,7 @@ main,footer{transition:opacity .22s ease}
   function applyLang(lang){
     var dict = T[lang] || EN;
     nodes.forEach(function(n){ var k = n.getAttribute('data-i18n'); n.innerHTML = (dict[k] !== undefined ? dict[k] : EN[k]); });
-    document.querySelectorAll('[data-form]').forEach(function(a){ a.href = FORMS[lang] || FORMS.en; });
+    document.querySelectorAll('[data-form],[data-wait]').forEach(function(a){ a.href = (a.hasAttribute('data-wait') ? WAITLIST : FORMS)[lang] || FORMS.en; });
     langBtns.forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.lang === lang ? 'true' : 'false'); });
     root.lang = lang;
   }
