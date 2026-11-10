@@ -83,9 +83,9 @@ header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 8
 .pill .dot::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--pine);animation:pulse 1.8s infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--pine) 60%,transparent)}100%{box-shadow:0 0 0 10px transparent}}
 h1{font-size:clamp(46px,7.6vw,96px);font-weight:800;letter-spacing:-.045em;margin:22px 0 22px}
-h1 .swap{display:inline-grid;vertical-align:bottom;background:var(--sun);color:#160F33;padding:0 .18em;border-radius:.14em;transform:rotate(-1.5deg);overflow:hidden;height:1.06em}
+h1 .swap{position:relative;display:inline-grid;vertical-align:bottom;background:var(--sun);color:#160F33;padding:0 .18em;border-radius:.14em;transform:rotate(-1.5deg);overflow:hidden;height:1.06em}
 h1 .swap span{grid-area:1/1;line-height:1.06;transition:transform .55s cubic-bezier(.7,0,.2,1),opacity .4s}
-h1 .swap span.out{transform:translateY(-110%);opacity:0}
+h1 .swap span.out{position:absolute;left:.18em;top:0;transform:translateY(-110%);opacity:0}
 h1 .swap span.in{transform:translateY(110%);opacity:0}
 .lede{font-size:clamp(18px,1.6vw,21px);color:var(--muted);max-width:560px}
 .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
@@ -780,16 +780,23 @@ main,footer{transition:opacity .2s ease}
   const swap = $('swap');
   let wi = 0;
   function swapReset() { wi = 0; swap.innerHTML = '<span>' + WORDS[lang][0] + '</span>'; }
-  if (!reduce) setInterval(() => {
-    const words = WORDS[lang];
-    wi = (wi + 1) % words.length;
-    const old = swap.querySelector('span:not(.out)');
+  // One visible word at a time: drop anything left from earlier ticks, skip ticks while the tab is hidden,
+  // and start the transition with a forced reflow instead of requestAnimationFrame (which pauses in background tabs).
+  function swapTick() {
+    if (document.hidden) return;
+    const spans = [...swap.children];
+    const cur = spans[spans.length - 1];
+    spans.forEach(s => { if (s !== cur) s.remove(); });
+    wi = (wi + 1) % WORDS[lang].length;
     const nw = document.createElement('span');
-    nw.textContent = words[wi]; nw.className = 'in';
+    nw.textContent = WORDS[lang][wi];
+    nw.className = 'in';
     swap.appendChild(nw);
-    requestAnimationFrame(() => requestAnimationFrame(() => { nw.className = ''; if (old) old.className = 'out'; }));
-    setTimeout(() => old && old.remove(), 700);
-  }, 2200);
+    void nw.offsetWidth;
+    nw.className = '';
+    if (cur) { cur.className = 'out'; setTimeout(() => cur.remove(), 600); }
+  }
+  if (!reduce) setInterval(swapTick, 2200);
 
   /* ---------- buy vs rent ---------- */
   const items = [...document.querySelectorAll('#items button')];
